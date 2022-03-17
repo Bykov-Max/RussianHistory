@@ -38,7 +38,10 @@ class LoginController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect()->route('admin.login');
+        $categories = Category::all();
+        $elements = Element::all();
+
+        return view('admin.login', ['elements' => $elements ,'categories' => $categories]);
     }
 
     public function dashboard(){
