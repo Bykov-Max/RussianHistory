@@ -42,7 +42,7 @@
             let tr = document.createElement("tr");
             tr.innerHTML = `<tr>
             <td> ${name} </td>
-            <td> ${description} </td>
+            <td> ${description.substring(0,101)} </td>
             <td> ${category} </td>
             <td> <a href="#" class="btn btn-outline-primary btn-sm"> Подробно </a> </td>
          </tr>`;
@@ -56,7 +56,7 @@
             // let path = '/admin/elements/edit/'+id;
             return `<tr>
                     <td> ${name} </td>
-                    <td> ${description} </td>
+                    <td> ${description.substring(0,101)} </td>
                     <td> ${category} </td>
                     <td> <a href="#" class="btn btn-outline-primary btn-sm"> Подробно </a> </td>
                 </tr>`;
