@@ -27,6 +27,9 @@ Route::get('/elements/filter/{category}', [ElementController::class, 'filter'])-
 Route::get('/elements/{element}', [ElementController::class, 'oneElement'])->name('elements.oneElement');
 
 
+Route::resource('elements', ElementController::class);
+
+
 Route::get('/register', [RegisterController::class, 'register'])->name('register.index');
 Route::post('/register', [RegisterController::class, 'registerStore'])->name('register.store');
 
@@ -38,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/profile', [LoginController::class, 'profile'])->name('profile');
 });
+
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -65,6 +69,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/elements-all', [ElementController::class, 'allElements']);
         Route::get('/elements/filter/{category}', [ElementController::class, 'filterCategory']);
+
+
 
     });
 });

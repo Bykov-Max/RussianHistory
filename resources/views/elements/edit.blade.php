@@ -34,7 +34,7 @@
                             <small class="text-muted">{{now()->format('d.m.Y')}}</small>
                         </p>
                         <div class="text-end">
-                            <button class="btn btn-outline-primary">Создать</button>
+                            <button class="btn btn-outline-primary">Обновить</button>
                         </div>
                     </div>
                 </div>
