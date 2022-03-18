@@ -24,7 +24,7 @@ class LoginController extends Controller
         if (Auth::attempt($request->only(['email', 'password']), $request->get('remember') == 'on'))
         {
             $request->session()->regenerate();
-            return redirect()->intended('auth.profile');
+            return redirect()->intended('profile');
         }
 
         return back()->withErrors(['errorLogin' => 'Ошибка входа...']);
