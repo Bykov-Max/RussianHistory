@@ -14,41 +14,45 @@ class ElementController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+
         $elements = Element::with(['category']);
         $images = Image::with(['element']);
 
-        return view('elements.show', compact('categories', 'elements', 'images'));
+        return view('elements.show', compact( 'elements', 'images'));
     }
 
     public function create()
     {
-        if (Auth::check()) {
+        if (Gate::allows('admin')) {
             $categories = Category::all();
-            $elements = Element::with(['category']);
 
-            return view('elements.create', compact('categories', 'elements'));
+            return view('elements.create', compact('categories'));
         }
+        return abort(403);
     }
 
     public function store(Request $request)
     {
         $path = FileServices::uploadFile($request->file('image'));
-        $path2 = FileServices::uploadFile($request->file('back_img'));
+        $path2 = FileServices::uploadFile($request->file('back_image'));
 
         if (Gate::allows('admin')) {
-            $element = Element::create([
-                'name' => $request->input('name'),
+            $category = Category::find($request->input('category_id'));
+            $element = $category->elements()->create([
+                'name' => $request->name,
                 'description' => $request->input('description'),
                 'back_img' => $path2,
             ]);
 
-            $element->images::create([
+            $element->images()->create([
                 'image' => $path
             ]);
-        }
 
-        return redirect('elements.index');
+
+
+            $categories = Category::all();
+            return view('elements.create', compact('categories'));
+        }
     }
 
     public function show(Element $element)
@@ -119,6 +123,7 @@ class ElementController extends Controller
 
     public function showElements()
     {
+
         $categories = Category::all();
         $elements = Element::with(['category']);
 

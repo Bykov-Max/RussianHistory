@@ -13,7 +13,8 @@ class Element extends Model
     protected $fillable = [
         'name',
         'description',
-        'back_img'
+        'back_img',
+        'category_id'
     ];
 
     public function category(){

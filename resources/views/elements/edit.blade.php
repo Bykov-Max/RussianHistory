@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('title', 'post-update')
+@extends('layouts.admin')
+@section('title', 'element-update')
 
 @section('content')
     <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>

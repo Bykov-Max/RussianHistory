@@ -27,8 +27,6 @@ Route::get('/elements/filter/{category}', [ElementController::class, 'filter'])-
 Route::get('/elements/{element}', [ElementController::class, 'oneElement'])->name('elements.oneElement');
 
 
-Route::resource('elements', ElementController::class);
-
 
 Route::get('/register', [RegisterController::class, 'register'])->name('register.index');
 Route::post('/register', [RegisterController::class, 'registerStore'])->name('register.store');
@@ -50,11 +48,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/', [\App\Http\Controllers\Admin\LoginController::class, 'loginCheck'])
         ->name('login.check');
 
-    Route::get('/users', [UserController::class, 'showUsers'])->name('show.users');
-    Route::get('/elements', [ElementController::class, 'showElements'])->name('show.elements');
+
 
 
     Route::middleware('can:admin')->group(function () {
+        Route::resource('elements', ElementController::class);
+
+        Route::get('/users', [UserController::class, 'showUsers'])->name('show.users');
+
+        Route::get('/categories/elements', [ElementController::class, 'showElements'])->name('show.elements');
+        Route::get('/categories/elements/create', [ElementController::class, 'create'])->name('create.elements');
+
+
         Route::get('/dashboard', [\App\Http\Controllers\Admin\LoginController::class, 'dashboard'])
             ->name('dashboard');
         Route::get('/logout', [\App\Http\Controllers\Admin\LoginController::class, 'logout'])
@@ -69,8 +74,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/elements-all', [ElementController::class, 'allElements']);
         Route::get('/elements/filter/{category}', [ElementController::class, 'filterCategory']);
-
-
-
     });
 });

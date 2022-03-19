@@ -12,6 +12,7 @@ class Image extends Model
 
     protected $fillable = [
         'image',
+        'element_id'
     ];
 
     public function element(){

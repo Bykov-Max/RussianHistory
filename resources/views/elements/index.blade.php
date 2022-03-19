@@ -10,6 +10,8 @@
             @endforeach
         </select>
 
+        <a href="{{route('admin.create.elements')}}" class="btn btn-outline-primary btn-sm"> Добавить элемент </a>
+
         <p id="countElements">Элементов найдено: </p>
         <table class="table-light text-center">
             <thead>
