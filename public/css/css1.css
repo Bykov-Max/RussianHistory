@@ -181,23 +181,23 @@ footer > div > a:hover{
     font-size: 2rem;
 }
 
-.back{
+.backReg{
     max-width: 100%;
     min-height: 100%;
-    object-fit: cover;
+    padding-bottom: 5%;
+    padding-top: 5%;
 }
 
 .backHistory{
     max-width: 100%;
     min-height: 100%;
-    object-fit: cover;
+    padding: 5%;
 }
 
 .backHistory>div{
     width: 70%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
     height: auto;
     padding: 20px;
     background-color: rgba(197, 201, 199, 0.8);
@@ -213,16 +213,17 @@ footer > div > a:hover{
 }
 
 .back{
+    min-height: 100%;
     max-width: 100%;
     min-height: 100%;
-    object-fit: cover;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
-.back>div{
+.element{
     width: 70%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
     height: auto;
     padding: 20px;
     background-color: rgba(197, 201, 199, 0.8);
@@ -230,7 +231,7 @@ footer > div > a:hover{
     font-size: 150%;
 }
 
-.back>div>h1{
+.element>h1{
     font-family: Ancient;
     font-weight: normal;
     text-align: center;

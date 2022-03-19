@@ -5,7 +5,7 @@
 @section('content')
     @if($element)
             <div class="back" style="background: url('/storage/{{$element->back_img}}')">
-                <div>
+                <div class="element">
                     <h1> {{$element->name}} </h1>
                     @foreach($element->images as $image)
                         <img src="{{ asset('storage/'.$image->image) }}">
