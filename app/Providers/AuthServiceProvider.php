@@ -17,12 +17,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('edit-element', function($user, $post){
-            return $user->id === $post->user_id;
+        Gate::define('edit-element', function($element){
+            return $element->id;
         });
 
-        Gate::define('delete-element', function($user, $post){
-            return $user->id === $post->user_id;
+        Gate::define('delete-element', function($element){
+            return $element->id;
         });
 
         Gate::define('admin', function($user){

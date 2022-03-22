@@ -18,16 +18,21 @@ class FileServices
         return $path;
     }
 
-    public static function deleteFile($file, $folder="public/", $defaultFiles=['default.jpg', 'logo.jpg']){
+    public static function deleteFile($file, $folder="public/", $defaultFiles='default.jpg'){
         $path = $folder.$file;
 
-        if(Storage::exists($path) && !in_array($file, $defaultFiles)){
+        if(Storage::exists($path) && ($file != $defaultFiles)){
             Storage::delete($path);
         }
     }
 
-    public static function updateFile($file, $folder="public/", $defaultFiles=['default.jpg', 'logo.jpg']){
-        self::deleteFile($file, $folder, $defaultFiles);
-        self::uploadFile($file, $defaultFiles[0], $folder);
+    public static function updateFile($file, $folder="public/", $defaultFiles='default.jpg'){
+        if($file != 0){
+            self::deleteFile($file, $folder, $defaultFiles);
+        }
+
+        $path = self::uploadFile($file, $defaultFiles, $folder);
+
+        return $path;
     }
 }

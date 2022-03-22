@@ -63,30 +63,38 @@ class ElementController extends Controller
     public function edit(Element $element)
     {
         if (Gate::allows('edit-element')) {
-            return view('elements.edit', ['element' => $element]);
+            $categories = Category::all();
+
+            return view('elements.edit', compact('categories', 'element'));
         }
     }
 
     public function update(Element $element)
     {
         if (Gate::allows('admin')) {
-            FileServices::updateFile($element->images);
+            foreach ($element->images as $image){
+                FileServices::updateFile($image->image);
+            }
+            FileServices::updateFile($element->back_img);
+
+
             $element->update();
-            return redirect()->route('elements.index');
+            return redirect()->route('admin.show.elements');
         }
 
-        return redirect()->route('elements.edit', ['element' => $element])->with('success', 'Данные успешно обновлены');
+        return redirect()->route('admin.show.elements', ['element' => $element])->with('success', 'Данные успешно обновлены');
     }
 
     public function destroy(Element $element)
     {
         if (Gate::allows('delete-element', $element)) {
-            FileServices::deleteFile($element->image);
+            FileServices::deleteFile($element->image->image);
+            FileServices::deleteFile($element->back_img);
             $element->delete();
-            return redirect()->route('elements.index');
+            return redirect()->route('admin.show.elements');
         }
 
-        return redirect()->route('elements.index', ['element' => $element])->with('success', 'Данные успешно удалены');
+        return redirect()->route('admin.show.elements', ['element' => $element])->with('success', 'Данные успешно удалены');
     }
 
     public function allElements()
@@ -123,7 +131,6 @@ class ElementController extends Controller
 
     public function showElements()
     {
-
         $categories = Category::all();
         $elements = Element::with(['category']);
 

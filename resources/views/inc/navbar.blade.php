@@ -1,7 +1,7 @@
 <header>
     <nav class="site">
         <div>
-            <p>RussianHistory.ru</p>
+            <p>ИсторияСлавянскагоЯзычества.рф</p>
         </div>
 
         <div>

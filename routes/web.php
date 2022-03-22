@@ -58,6 +58,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/categories/elements', [ElementController::class, 'showElements'])->name('show.elements');
         Route::get('/categories/elements/create', [ElementController::class, 'create'])->name('create.elements');
+        Route::get('/elements/edit/{element}', [ElementController::class, 'edit'])->name('edit.elements');
 
 
         Route::get('/dashboard', [\App\Http\Controllers\Admin\LoginController::class, 'dashboard'])

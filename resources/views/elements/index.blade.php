@@ -2,6 +2,23 @@
 @section('title', 'elements')
 
 @section('content')
+    <style>
+        .buttonDel{
+            color: #0d6efd;
+            border: 1px solid #0d6efd;
+            background-color: white;
+            transition: 0.5s all ease;
+            border-radius: 3px;
+            height: 32px;
+        }
+
+        .buttonDel:hover{
+            color: white;
+            background-color: red;
+        }
+    </style>
+
+
     <div class="container">
         <select name="categories" id="categories">
             <option value="0" selected> Все элементы</option>
@@ -23,7 +40,8 @@
             </th>
             <th class="col-3">Описание</th>
             <th class="col-3">Категория</th>
-            <th class="col-3">Действия</th>
+            <th class="col-3">Изменить</th>
+            <th class="col-3">Удалить</th>
             </thead>
 
             <tbody id="tableElements">
@@ -39,29 +57,26 @@
     <script>
         console.log('hello')
 
-        function createTableRow({name, category, description, id}) {
-            console.log('123')
-            let tr = document.createElement("tr");
-            tr.innerHTML = `<tr>
-            <td> ${name} </td>
-            <td> ${description.substring(0,101)} </td>
-            <td> ${category} </td>
-            <td> <a href="#" class="btn btn-outline-primary btn-sm"> Подробно </a> </td>
-         </tr>`;
-
-            return tr;
-        }
-
         function createTableRow2({name, category, description, id}) {
             console.log('123')
 
-            // let path = '/admin/elements/edit/'+id;
+            let path = '/admin/elements/edit/'+id;
+            let path2 = '/admin/elements/'+id;
             return `<tr>
-                    <td> ${name} </td>
-                    <td> ${description.substring(0,101)} </td>
-                    <td> ${category} </td>
-                    <td> <a href="#" class="btn btn-outline-primary btn-sm"> Подробно </a> </td>
-                </tr>`;
+                        <td> ${name} </td>
+                        <td> ${description.substring(0,101)} </td>
+                        <td> ${category} </td>
+                        <td> <a href="${path}" class="btn btn-outline-primary btn-sm"> Изменить </a> </td>
+                        <td> <form action='${path2}' method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button onclick="return confirm('Вы действительно хотите удалить информацию?');"
+                                        name="deleteBtn" class="buttonDel">
+                                        Удалить
+                                </button>
+                               </form>
+                        </td>
+                    </tr>`;
         }
 
         async function getElements() {
@@ -74,11 +89,9 @@
 
         function renderElements(elements) {
             let table = document.querySelector('#tableElements')
-            //clearContainer(table);
 
             let res = "";
             elements.forEach((element) => {
-                //table.append(createTableRow(element));
                 res += createTableRow2(element);
             })
             table.innerHTML = res;
