@@ -65,7 +65,7 @@
 
                         {{-- Фоновое изображение --}}
                         <div class="md-3">
-                            <p></p>
+                            <p>Выберите фоновое изображение</p>
                             <input type="file" id="back_image" name="back_image" value="Выберите фоновое изображение">
                         </div>
 

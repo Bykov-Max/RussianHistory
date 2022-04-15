@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Element;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,8 @@ class LoginController extends Controller
     public function dashboard(){
         $categories = Category::all();
         $elements = Element::all();
+        $comments = Comment::all();
 
-        return view('admin.dashboard', ['elements' => $elements ,'categories' => $categories]);
+        return view('admin.dashboard', ['elements' => $elements ,'categories' => $categories, 'comments' => $comments]);
     }
 }

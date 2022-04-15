@@ -3,8 +3,12 @@
 
 @section('content')
     <h4>Привет, {{Auth::user()->role->role}} {{Auth::user()->full_name}}</h4>
-    <div style="background-color: red; color: white; width: 200px; height: 50px;"> Количество элементов: {{$elements->count()}} </div> <br>
-    <div style="background-color: blue; color: white; width: 200px; height: 50px;"> Количество пользователей: {{Auth::user()->count()}} </div> <br>
-    <div style="background-color: blue; color: white; width: 200px; height: 50px;"> Количество категорий: {{$categories->count()}} </div>
+    <div class="counts">
+        <div style="background-color: red; color: white;"> Количество пользователей: {{Auth::user()->count()}} </div>
+        <div style="background-color: blue; color: white;"> Количество элементов: {{$elements->count()}} </div>
+        <div style="background-color: blue; color: white;"> Количество категорий: {{$categories->count()}} </div>
+        <div style="background-color: blue; color: white;"> Количество комментариев: {{$comments->count()}} </div>
+    </div>
+
 
 @endsection

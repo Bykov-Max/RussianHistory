@@ -2,21 +2,7 @@
 @section('title', 'elements')
 
 @section('content')
-    <style>
-        .buttonDel{
-            color: #0d6efd;
-            border: 1px solid #0d6efd;
-            background-color: white;
-            transition: 0.5s all ease;
-            border-radius: 3px;
-            height: 32px;
-        }
 
-        .buttonDel:hover{
-            color: white;
-            background-color: red;
-        }
-    </style>
 
 
     <div class="container">
@@ -30,7 +16,7 @@
         <a href="{{route('admin.create.elements')}}" class="btn btn-outline-primary btn-sm"> Добавить элемент </a>
 
         <p id="countElements">Элементов найдено: </p>
-        <table class="table-light text-center">
+        <table class="table-light text-center" border="2" cellpadding="20px" cellspacing="20px">
             <thead>
             <th class="col-4">
                 <div class="d-flex justify-content-between align-items-center">
@@ -44,7 +30,7 @@
             <th class="col-3">Удалить</th>
             </thead>
 
-            <tbody id="tableElements">
+            <tbody id="tableElements" style="border: 2px solid black">
 
             </tbody>
         </table>
@@ -55,14 +41,10 @@
 @push('child-scripts')
         <script src="{{asset('/js/fetchGetElements.js')}}"></script>
     <script>
-        console.log('hello')
-
         function createTableRow2({name, category, description, id}) {
-            console.log('123')
-
             let path = '/admin/elements/edit/'+id;
             let path2 = '/admin/elements/'+id;
-            return `<tr>
+            return `<tr style="border: 2px solid black">
                         <td> ${name} </td>
                         <td> ${description.substring(0,101)} </td>
                         <td> ${category} </td>
@@ -88,6 +70,7 @@
         }
 
         function renderElements(elements) {
+            console.log(elements)
             let table = document.querySelector('#tableElements')
 
             let res = "";

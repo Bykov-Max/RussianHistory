@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ElementController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [CategoryController::class, 'index']);
+Route::get('/', [CategoryController::class, 'index'])->name('home');
 
 Route::get('/elements', [ElementController::class, 'index'])->name('elements.index');
 
@@ -38,6 +39,11 @@ Route::post('/login', [LoginController::class, 'loginCheck'])->name('login.check
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/profile', [LoginController::class, 'profile'])->name('profile');
+
+
+    Route::resource('comments', CommentController::class);
+//    Route::post('/comments/{element}/create', [CommentController::class, 'create'])->name('comment.create');
+
 });
 
 
@@ -47,8 +53,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->name('login');
     Route::post('/', [\App\Http\Controllers\Admin\LoginController::class, 'loginCheck'])
         ->name('login.check');
-
-
 
 
     Route::middleware('can:admin')->group(function () {
@@ -75,5 +79,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/elements-all', [ElementController::class, 'allElements']);
         Route::get('/elements/filter/{category}', [ElementController::class, 'filterCategory']);
+
+
+
+        Route::get('/comments', [CommentController::class, 'index'])->name('show.comments');
+        Route::get('/comments-all', [CommentController::class, 'allComments']);
+
+        Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+        Route::get('/comments/{comment}/updateStatus', [CommentController::class, 'changeStatus'])->name('comments.update.status');
+
+        Route::get('/comments/filter/{status}', [CommentController::class, 'filterStatus'])->name('comments.filter.status');
+        
+        Route::get('/comments/filter/{user}', [CommentController::class, 'filterCommentsByUser'])->name('comments.filter.user');
+
     });
 });

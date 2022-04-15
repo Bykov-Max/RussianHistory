@@ -7,12 +7,19 @@
                         Пользователи
                     </a>
                 </li>
-                    <li>
-                        <a class="nav-link active users" aria-current="page" href="{{route('admin.show.elements')}}">
-                            <span data-feather="home"></span>
-                            Категории
-                        </a>
-                    </li>
+                <li>
+                    <a class="nav-link active users" aria-current="page" href="{{route('admin.show.elements')}}">
+                        <span data-feather="home"></span>
+                        Элементы по категорям
+                    </a>
+                </li>
+
+                <li>
+                    <a class="nav-link active users" aria-current="page" href="{{route('admin.show.comments')}}">
+                        <span data-feather="home"></span>
+                        Комментарии
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>

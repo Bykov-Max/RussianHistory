@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="backReg" style="background: url('/storage/glavnaya3.jpg')">
-        <div class="card offset-4 col-4 mt-5">
+        <div class="card offset-4 col-4 mt-5 register">
             <div class="card-header">
                 Регистрация
             </div>

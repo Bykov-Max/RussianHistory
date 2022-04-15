@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreElementrequest;
 use App\Http\Resources\ElementResource;
 use App\Models\Category;
 use App\Models\Element;
@@ -14,7 +15,6 @@ class ElementController extends Controller
 {
     public function index()
     {
-
         $elements = Element::with(['category']);
         $images = Image::with(['element']);
 
@@ -28,7 +28,6 @@ class ElementController extends Controller
 
             return view('elements.create', compact('categories'));
         }
-        return abort(403);
     }
 
     public function store(Request $request)
@@ -49,7 +48,6 @@ class ElementController extends Controller
             ]);
 
 
-
             $categories = Category::all();
             return view('elements.create', compact('categories'));
         }
@@ -62,33 +60,40 @@ class ElementController extends Controller
 
     public function edit(Element $element)
     {
-        if (Gate::allows('edit-element')) {
+        if (Gate::allows('edit-element') && Gate::allows('admin')) {
             $categories = Category::all();
 
             return view('elements.edit', compact('categories', 'element'));
         }
     }
 
-    public function update(Element $element)
+    public function update(StoreElementrequest $request,Element $element)
     {
         if (Gate::allows('admin')) {
+            $path = FileServices::updateFile($request->file('image'), $element->back_img);
+
             foreach ($element->images as $image){
-                FileServices::updateFile($image->image);
+                FileServices::updateFile($request->file('image'), $image);
             }
-            FileServices::updateFile($element->back_img);
 
+            $element->update([
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+                'image' => $path,
+                'category_id' => $request->get('category_id'),
+            ]);
 
-            $element->update();
-            return redirect()->route('admin.show.elements');
+            return redirect()->route('admin.show.elements', ['element' => $element])->with('success', 'Данные успешно обновлены');
         }
-
-        return redirect()->route('admin.show.elements', ['element' => $element])->with('success', 'Данные успешно обновлены');
     }
 
     public function destroy(Element $element)
     {
         if (Gate::allows('delete-element', $element)) {
-            FileServices::deleteFile($element->image->image);
+            foreach ($element->images as $image){
+                FileServices::deleteFile($image->image);
+            }
+
             FileServices::deleteFile($element->back_img);
             $element->delete();
             return redirect()->route('admin.show.elements');
@@ -114,11 +119,18 @@ class ElementController extends Controller
 
     public function filter(Category $category)
     {
-        return view('elements.show', [
-            'categories' => Category::all(),
-            'category' => $category,
-            'elements' => $category->elements
-        ]);
+        foreach ($category->elements as $element){
+            if($element->id == 1){
+                $categories = Category::all();
+                return view('elements.oneElement', compact('categories', 'element'));
+            }
+            return view('elements.show', [
+                'categories' => Category::all(),
+                'category' => $category,
+                'elements' => $category->elements
+            ]);
+        }
+
     }
 
     public function oneElement(Element $element)

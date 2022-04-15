@@ -34,7 +34,7 @@ class RegisterController extends Controller
 
         if($user){
             Auth::login($user);
-            return redirect()->route('/');
+            return redirect()->route('home');
         }
 
         return back()->withErrors([

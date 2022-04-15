@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <meta name="descriprion" content="История славянского язычства, История славянства">
 <head>
+    <meta http-equiv="Content-Type" content="text/html" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,5 +27,9 @@
 @include('inc.footer')
 <script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('/js/workWithFile.js')}}"></script>
+<script src="{{asset('/js/js1.js')}}"> </script>
+
+@stack('child-scripts')
+
 </body>
 </html>

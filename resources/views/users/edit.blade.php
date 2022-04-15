@@ -9,7 +9,7 @@
         @method('PATCH')
         <select id="selectRole">
             @foreach($roles as $role)
-                <option value="{{$role->id}}" {{$role->id == $user->role_id ? 'selected' : ''}}> {{$role->role}} </option>
+                <option value="{{$role->id}}" {{$role->id == $user->role_id ? 'selected' : ''}}> {{$role->name}} </option>
             @endforeach
         </select>
 
