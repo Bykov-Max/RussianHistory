@@ -137,7 +137,7 @@ class ElementController extends Controller
     {
         return view('elements.oneElement', [
             'categories' => Category::all(),
-            'element' => $element
+            'element' => $element,
         ]);
     }
 

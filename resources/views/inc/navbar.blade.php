@@ -29,7 +29,7 @@
     <div class="burger"> <p align="center">Меню</p> </div>
     <div class="block-menu">
         
-        <a href="{{route('home')}}" class="logo"> <img src="{{asset('/storage/logo2.jpg')}}" alt="logo"> </a>
+        <a href="{{route('home')}}" class="logo"> <img src="{{asset('/storage/new_logo2.png')}}" alt="logo"> </a>
         @if($categories)
             @foreach($categories as $category)
                 <a href="{{route('elements.filter', $category->id)}}"> {{$category->name}} </a>

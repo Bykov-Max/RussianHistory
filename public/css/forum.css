@@ -1,0 +1,93 @@
+.chat-row{
+    margin: 50px;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul li{
+    padding: 8px;
+    background: #928787;
+    margin-bottom: 20px;
+}
+
+ul li:nth-child(2n-2){
+    background: #c3c5c5;
+}
+
+.chat-input{
+    border: 1px solid black;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 8px 10px;
+}
+
+.themes{
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.theme{
+    text-align: center;
+    background-color: silver;
+    width: 50%;
+    padding: 15px;
+    border: 1px solid black;
+    margin: 10% 150px 50px 30%;
+    font-family: Ancient;
+    font-size: 2rem;
+    text-decoration: none;
+}
+
+.new_theme{
+    background-color: silver;
+    width: 50%;
+    height: 75px;
+    border: 1px solid black;
+    padding-left: 10px;
+}
+
+.chat{
+    width: 90%;
+    background-color: rgba(197, 201, 199, 0.8);
+}
+
+.chats{
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    max-width: 100%;
+    width: 100%;
+    min-height: 100vh;
+    object-fit: cover;
+    padding: 5%;
+    background-size: 110% !important;
+}
+
+.content-div{
+    display: grid;
+    grid-template-columns: 12fr 0.2fr;
+    grid-gap: 5px;
+    margin-bottom: 20px;
+}
+
+.content{
+    width: 90%;
+    height: 70px;
+    resize: none;
+}
+
+.add{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    grid-gap: 20px;
+    margin-bottom: 30px;
+}
+
+.addTheme{
+    height: 75px;
+}

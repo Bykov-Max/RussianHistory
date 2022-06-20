@@ -28,7 +28,11 @@ class LoginController extends Controller
 
         if (Auth::attempt($request->only(['email', 'password'])) && Gate::allows('admin')) {
             $request->session()->regenerate();
-            return redirect()->route('admin.dashboard', ['elements' => $elements ,'categories' => $categories]);
+            $categories = Category::all();
+            $elements = Element::all();
+            $comments = Comment::all();
+
+            return view('admin.dashboard', ['elements' => $elements ,'categories' => $categories, 'comments' => $comments]);
         }
 
         return back()->withErrors(['errorLogin' => 'Ошибка входа...']);

@@ -1,6 +1,6 @@
 <footer>
     <div>
-        <a href="#"> О нас </a>
+        <a href="{{route('show.themes')}}"> Форум </a>
     </div>
 
 </footer>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <meta name="descriprion" content="История славянского язычства, История славянства">
+    <meta name="description" content="История славянского язычства, История славянства">
 <head>
     <meta http-equiv="Content-Type" content="text/html" />
     <meta charset="utf-8">
@@ -14,14 +14,17 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('/css/css1.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/forum.css')}}">
 
 </head>
 <body class="antialiased">
 
 @include('inc.navbar')
 
+<div class="contain">
+    @yield('content')
+</div>
 
-@yield('content')
 
 
 @include('inc.footer')

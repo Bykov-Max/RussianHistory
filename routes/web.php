@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ElementController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,8 +43,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [LoginController::class, 'profile'])->name('profile');
 
 
+
+    Route::post('/forum/send/message', [ChatController::class, 'postMessage'])->name('send.message');
+
+    Route::post('/theme/add', [ThemeController::class, 'store'])->name('theme.add');
+
+
+
     Route::resource('comments', CommentController::class);
-//    Route::post('/comments/{element}/create', [CommentController::class, 'create'])->name('comment.create');
 
 });
 
@@ -90,8 +98,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/comments/{comment}/updateStatus', [CommentController::class, 'changeStatus'])->name('comments.update.status');
 
         Route::get('/comments/filter/{status}', [CommentController::class, 'filterStatus'])->name('comments.filter.status');
-        
+
         Route::get('/comments/filter/{user}', [CommentController::class, 'filterCommentsByUser'])->name('comments.filter.user');
 
     });
 });
+
+
+Route::get('/forum/{theme}', [ChatController::class, 'getIndex'])->name('show.messages');
+
+Route::get('/forum/get/theme', [ChatController::class, 'getMessages'])->name('show.themes');
+
+
+
+

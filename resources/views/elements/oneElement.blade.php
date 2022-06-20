@@ -72,6 +72,7 @@
         async function getComments(){
             let response = await fetch('/api/comments');
             let data = await response.json();
+            console.log("dfdfd"+data);
             return data;
         }
 
@@ -83,7 +84,6 @@
 
         function renderComments(comments) {
             let comms = document.querySelector('#comments')
-
             let res = "";
             comments.forEach((comment) => {
                 if (comment.status == 1){
@@ -119,11 +119,5 @@
         }
 
         start();
-
-        let submit = document.querySelector('#submit');
-        submit.addEventListener('click', function (e){
-            e.target.preventDefault();
-
-        });
     </script>
 @endpush
